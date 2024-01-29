@@ -69,6 +69,8 @@ public class Attack : MonoBehaviour
             }
             else
             {
+                if (!TilemapManager.instance.wallDictionary.ContainsKey(cellPosition)) return;
+
                 if (TilemapManager.instance.wallDictionary[cellPosition].HP > 0f)
                 {
                     TilemapManager.instance.wallDictionary[cellPosition].HP -= statsHandler.CurrentStats.miningAttack;
@@ -78,6 +80,7 @@ public class Attack : MonoBehaviour
                     if (TilemapManager.instance.wallDictionary[cellPosition].HP <= 0f)
                     {
                         TilemapManager.instance.tilemap.SetTile(TilemapManager.instance.tilemap.WorldToCell(cellPosition), null);
+                        TilemapManager.instance.wallDictionary.Remove(cellPosition);
                         ItemManager.instacne.itemPool.ItemSpawn(2101, cellPosition);
                         // 타일의 지붕 없애기.
                         Vector3Int ceilingPosition = new Vector3Int(cellPosition.x, cellPosition.y + 1, 0);
