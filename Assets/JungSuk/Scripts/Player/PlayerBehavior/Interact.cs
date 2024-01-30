@@ -9,11 +9,17 @@ public class Interact : MonoBehaviour
     private CharacterController controller;
     public Collider2D rangebox;
     private Dictionary<string, GameObject> interactiveUIs = new Dictionary<string, GameObject>();
+
+    public Canvas canvas;
+
+    public GameObject inventory;
+
     private void Awake()
     {
         controller = GetComponent<CharacterController>();
         
     }
+
     // Start is called before the first frame update
     //private void Start()
     //{
@@ -25,6 +31,10 @@ public class Interact : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Escape))
         {
             CancelUI();
+        }
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            OpenInventory();
         }
     }
 
@@ -50,7 +60,7 @@ public class Interact : MonoBehaviour
                 
                 if(UI != null)
                 {
-                    GameObject instantiatedUI = Instantiate(UI);
+                    GameObject instantiatedUI = Instantiate(UI, canvas.transform);
 
                     if(instantiatedUI != null)
                     {
@@ -71,5 +81,17 @@ public class Interact : MonoBehaviour
             ui.Value.SetActive(false);
         }
         controller.CanControllCharacter = true;
+    }
+
+    public void OpenInventory()
+    {
+        if (!inventory)
+        {
+            inventory.SetActive(false);
+        }
+        else
+        {
+            inventory.SetActive(true);
+        }
     }
 }

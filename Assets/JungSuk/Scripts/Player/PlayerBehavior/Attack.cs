@@ -81,7 +81,7 @@ public class Attack : MonoBehaviour
                     {
                         TilemapManager.instance.tilemap.SetTile(TilemapManager.instance.tilemap.WorldToCell(cellPosition), null);
                         TilemapManager.instance.wallDictionary.Remove(cellPosition);
-                        ItemManager.instacne.itemPool.ItemSpawn(2101, cellPosition);
+                        ItemManager.instance.itemPool.ItemSpawn(2101, cellPosition);
                         // 타일의 지붕 없애기.
                         Vector3Int ceilingPosition = new Vector3Int(cellPosition.x, cellPosition.y + 1, 0);
                         if (TilemapManager.instance.ceilingTile.GetTile(ceilingPosition))

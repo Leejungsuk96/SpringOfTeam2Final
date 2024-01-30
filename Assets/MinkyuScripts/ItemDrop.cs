@@ -8,6 +8,6 @@ public class ItemDrop : MonoBehaviour
 {
     private void Start()
     {
-        ItemManager.instacne.itemPool.ItemSpawn(2101, transform.position);
+        ItemManager.instance.itemPool.ItemSpawn(2101, transform.position);
     }
 }

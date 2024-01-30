@@ -50,6 +50,6 @@ public class PickUp : MonoBehaviour
 
     private void SetItemInfo(int Index)
     {
-        item = ItemManager.instacne.items[Index];
+        item = ItemManager.instance.items[Index];
     }
 }

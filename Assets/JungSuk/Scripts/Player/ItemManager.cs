@@ -21,7 +21,7 @@ public class ItemManager : MonoBehaviour
 {
     private static ItemManager _instance;
 
-    public static ItemManager instacne
+    public static ItemManager instance
     {
         get
         {
@@ -44,6 +44,7 @@ public class ItemManager : MonoBehaviour
     
     public ItemPool itemPool;
 
+    public Dictionary<int, Sprite> spriteDictionary;
 
     private void Awake()
     {
@@ -52,6 +53,9 @@ public class ItemManager : MonoBehaviour
             Destroy(this.gameObject);
         }
         _instance = this;
+
+        spriteDictionary = new Dictionary<int, Sprite>();
+        SpriteMapping();
     }
 
     void Start()
@@ -63,5 +67,31 @@ public class ItemManager : MonoBehaviour
             items.Add(int.Parse(row[0]), new Item(int.Parse(row[0]), int.Parse(row[1]), row[2], row[3], float.Parse(row[4]), float.Parse(row[5]), float.Parse(row[6]), 
                 float.Parse(row[7]), float.Parse(row[8]), float.Parse(row[9]),float.Parse(row[10]), int.Parse(row[11]), row[12] == "TRUE"));
         }
+    }
+
+
+
+
+    public Sprite GetSpriteByItemCode(int itemCode)
+    {
+        // Dictionary에서 해당 인트 값에 대응하는 Sprite를 가져오기
+        if (spriteDictionary.TryGetValue(itemCode, out Sprite sprite))
+        {
+            return sprite;
+        }
+        else
+        {
+            Debug.LogError("해당 키값에 이미지없음.");
+            return null;
+        }
+    }
+
+    public void SpriteMapping()
+    {
+        spriteDictionary.Add(2101, Resources.Load<Sprite>("ItemSprite/2101"));
+        spriteDictionary.Add(1703, Resources.Load<Sprite>("ItemSprite/1703"));
+        spriteDictionary.Add(1713, Resources.Load<Sprite>("ItemSprite/1713"));
+        spriteDictionary.Add(1723, Resources.Load<Sprite>("ItemSprite/1723"));
+        Debug.Log("이미지 로드 완료");
     }
 }
